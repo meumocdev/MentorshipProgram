@@ -6,7 +6,7 @@ SELECT
 FROM runners r
   GROUP BY DATEPART(WEEK, r.registration_date)
 
---2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order?
+--2. What was the average time in minutes it took for each runner to arrive at the Pizza Runner HQ to pickup the order
 WITH time_taken_cte AS
 (  
   SELECT
