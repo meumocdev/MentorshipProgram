@@ -81,7 +81,6 @@ WHERE total_deposit > 1 AND
   (total_purchase >=1 OR total_purchase>=1)
 GROUP BY months
 
--- 4. What is the closing balance for each customer at the end of the month? Also show the change in balance each month in the same table output.
 
 
 
