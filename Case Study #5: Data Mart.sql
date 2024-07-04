@@ -105,3 +105,60 @@ SELECT
     SUM(sales),
 FROM age_demographic_retail_sale
 WHERE MAX(total_sale)
+
+-- 9. Can we use the avg_transaction column to find the average transaction size for each year for Retail vs Shopify? If not - how would you calculate it instead?
+SELECT 
+  calendar_year, 
+  platform, 
+  ROUND(AVG(avg_transaction),0) AS avg_transaction_row, 
+  SUM(sales) / sum(transactions) AS avg_transaction_group
+FROM clean_weekly_sales
+GROUP BY calendar_year, platform
+ORDER BY calendar_year, platform;
+
+-- 🧼 C. Before & After Analysis
+--1. What is the total sales for the 4 weeks before and after 2020-06-15? What is the growth or reduction rate in actual values and percentage of sales?
+WITH sale_8_weeks(
+  SELECT
+  week_number,
+  SUM(sales) AS total_sales
+FROM clean_weekly_sales
+WHERE week_number BETWEEN 20 AND 28 
+  AND calendar_year=2020
+GROUP BY week_number
+)
+WITH before_after_weeks(
+  SELECT 
+    week_number,
+    SUM(CASE WHEN week_number BETWEEN 21 AND 24 then total_sales) as before_weeks
+    SUM(CASE WHEN week_number BETWEEN 25 AND 28 then total_sales) as after_weeks
+  FROM sale_8_weeks
+)
+SELECT 
+  (after_weeks - before_weeks) AS sales_variance,
+  ROUND(100 * after_weeks - before_weeks /before_weeks ,2) AS variance_percentage
+FROM before_after_weeks
+
+-- 2. What about the entire 12 weeks before and after?
+WITH sale_12_weeks(
+  SELECT
+  week_number,
+  SUM(sales) AS total_sales
+FROM clean_weekly_sales
+WHERE week_number BETWEEN 13 AND 37 
+  AND calendar_year=2020
+GROUP BY week_number
+)
+WITH before_after_weeks(
+  SELECT 
+    week_number,
+    SUM(CASE WHEN week_number BETWEEN 13 AND 24 then total_sales) as before_weeks
+    SUM(CASE WHEN week_number BETWEEN 25 AND 37 then total_sales) as after_weeks
+  FROM sale_8_weeks
+)
+SELECT 
+  (after_weeks - before_weeks) AS sales_variance,
+  ROUND(100 * after_weeks - before_weeks /before_weeks ,2) AS variance_percentage
+FROM before_after_weeks
+
+
