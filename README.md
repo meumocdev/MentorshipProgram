@@ -7,6 +7,7 @@ Yesterday:
 
 Today:
 - Completed parts B Case Study #2
+
 Link github: No Update
 Blocker: None
 
