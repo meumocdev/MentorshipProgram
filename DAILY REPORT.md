@@ -1,4 +1,5 @@
 ================================== DAILY REPORT =======================================
+
 Nguyen Ngo Thanh Tai: Daily Report 21/06/2024
 Yesterday:
 - Reviewed Case Study 1
