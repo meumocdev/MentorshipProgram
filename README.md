@@ -4,6 +4,7 @@ Nguyen Ngo Thanh Tai: Daily Report 21/06/2024
 Yesterday:
 - Reviewed Case Study 1
 - Completed parts A Case Study #2 - Pizza Runner
+
 Today:
 - Completed parts B Case Study #2
 Link github: No Update
