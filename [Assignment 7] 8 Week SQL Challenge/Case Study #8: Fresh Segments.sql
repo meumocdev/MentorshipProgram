@@ -48,3 +48,70 @@ LEFT JOIN interest_map map ON metrics.interest_id = map.id;
 -- 5. Summarize the id values in the interest_map by its total record count in this table.
 SELECT COUNT(*) AS map_id_count
 FROM interest_map;
+
+-- B. Interest Analysis
+-- 1. Which interests have been present in all month_year dates in our dataset?
+SELECT interest_id,
+	COUNT(month_year) AS cnt
+FROM interest_metrics
+GROUP BY interest_id
+HAVING COUNT(month_year) = (SELECT COUNT(DISTINCT month_year) FROM interest_metrics)
+
+-- 2. Using this same total_months measure - calculate the cumulative percentage of all records starting at 14 months - which total_months value passes the 90% cumulative percentage value? 
+WITH interest_months AS (
+  SELECT
+    interest_id,
+    COUNT(DISTINCT month_year) AS total_months
+  FROM interest_metrics
+  GROUP BY interest_id
+),
+interest_count AS (
+  SELECT
+    total_months,
+    COUNT(interest_id) AS interests
+  FROM interest_months
+  GROUP BY total_months
+)
+SELECT *,
+  ROUND(100 * SUM(interests) OVER (ORDER BY total_months DESC) 
+        / (SUM(interests) OVER ()),2) AS cumulative_percentage
+FROM interest_count
+
+-- 3. If we were to remove all interest_id values which are lower than the total_months value we found in the previous question - how many total data points would we be removing? 
+WITH interest_months AS (
+  SELECT
+    interest_id,
+    COUNT(DISTINCT month_year) AS total_months
+  FROM interest_metrics
+  GROUP BY interest_id
+)
+
+SELECT 
+  COUNT(interest_id) AS interests,
+  COUNT(DISTINCT interest_id) AS unique_interests
+FROM interest_metrics
+WHERE interest_id IN (
+  SELECT interest_id 
+  FROM interest_months
+  WHERE total_months < 6);
+
+-- 4. Does this decision make sense to remove these data points from a business perspective? 
+
+
+-- 5. If we include all of our interests regardless of their counts - how many unique interests are there for each month? 
+WITH interest_metrics_edited AS (
+SELECT *
+FROM interest_metrics
+WHERE interest_id NOT IN (
+  SELECT interest_id
+  FROM interest_metrics
+  GROUP BY interest_id
+  HAVING COUNT(DISTINCT month_year) < 6)
+)
+SELECT 
+  month_year,
+  COUNT(DISTINCT interest_id) AS unique_interests
+FROM interest_metrics_edited
+GROUP BY month_year
+ORDER BY month_year
+-- C. Segment Analysis 
