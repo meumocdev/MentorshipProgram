@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="THANH TAI"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-24 11:17:32 PM"/>
+        <attribute name="created" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzEwOjIwOjE2IFBNOzI5Nzc="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzEwOjIwOjQ3IFBNOzE7VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzA5OjUzOjI1IFBNO1ExX2ZpbmRNb3N0RnJlcXVlbnRFbGVtZW50LmZwcmc7OTI5Mg=="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzExOjE3OjMyIFBNOzI7MzA5MQ=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Delete the position element you want in array"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter numbers of elements in array: &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="a" type="Integer" array="True" size="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter position of elements you want to delete in array: (position from 0 to n-1)&quot;" newline="True"/>
+            <declare name="position" type="Integer" array="False" size=""/>
+            <input variable="position"/>
+            <if expression="position&gt;=0 AND position&lt;=n-1">
+                <then/>
+                <else>
+                    <output expression="&quot;Enter position of elements you want to delete in array (position from 0 to n-1): &quot;" newline="True"/>
+                    <input variable="position"/>
+                </else>
+            </if>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(10)"/>
+                <output expression="a[i]" newline="True"/>
+            </for>
+            <output expression="&quot;----------&quot;" newline="True"/>
+            <call expression="deleteElement(a,n,position)"/>
+        </body>
+    </function>
+    <function name="deleteElement" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+            <parameter name="position" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="n-1" end="position" direction="inc" step="1">
+                <assign variable="a[i]" expression="a[i+1]"/>
+            </for>
+            <assign variable="n" expression="n-1"/>
+            <output expression="&quot;Array after delete position: &quot;" newline="True"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <output expression="a[i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
