@@ -115,3 +115,49 @@ FROM interest_metrics_edited
 GROUP BY month_year
 ORDER BY month_year
 -- C. Segment Analysis 
+-- 1. Using the complete dataset - which are the top 10 and bottom 10 interests which have the largest composition values in any month_year? Only use the maximum composition value for each interest but you must keep the corresponding month_year
+
+
+-- 2. Which 5 interests had the lowest average ranking value?
+WITH interest_metrics_edited AS (
+SELECT *
+FROM interest_metrics
+WHERE interest_id NOT IN (
+  SELECT interest_id
+  FROM interest_metrics
+  GROUP BY interest_id
+  HAVING COUNT(DISTINCT month_year) < 6)
+)
+SELECT 
+  metrics.interest_id,
+  map.interest_name,
+  Round(AVG(1.0 * metrics.ranking), 2) AS avg_ranking
+FROM interest_metrics_edited metrics
+JOIN interest_map map ON metrics.interest_id = map.id
+GROUP BY metrics.interest_id, map.interest_name
+ORDER BY avg_ranking
+LIMIT 5
+
+-- 3. Which 5 interests had the largest standard deviation in their percentile_ranking value?
+WITH interest_metrics_edited AS (
+  SELECT *
+  FROM interest_metrics
+  WHERE interest_id NOT IN (
+    SELECT interest_id
+    FROM interest_metrics
+    GROUP BY interest_id
+    HAVING COUNT(DISTINCT month_year) < 6)
+)
+SELECT 
+  DISTINCT metrics.interest_id,
+  map.interest_name,
+  ROUND(CAST(STDDEV_SAMP(metrics.percentile_ranking) OVER (PARTITION BY metrics.interest_id) AS NUMERIC), 2) AS std_percentile_ranking
+FROM interest_metrics_edited metrics
+JOIN interest_map map ON metrics.interest_id = map.id
+ORDER BY std_percentile_ranking DESC
+LIMIT 5
+
+-- 4. For the 5 interests found in the previous question - what was minimum and maximum percentile_ranking values for each interest and its corresponding year_month value? Can you describe what is happening for these 5 interests?
+
+
+-- 5. How would you describe our customers in this segment based off their composition and ranking values? What sort of products or services should we show to these customers and what should we avoid?
