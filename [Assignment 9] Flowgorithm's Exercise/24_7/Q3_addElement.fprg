@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="THANH TAI"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-25 07:17:29 PM"/>
+        <attribute name="created" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzEwOjU0OjA0IFBNOzI5ODE="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI1OzA5OjE3OjAyIEFNOzM7VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzEwOjIwOjE2IFBNO1EyX2RlbGV0ZUVsZW1lbnQuZnByZzs4MjIx"/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI1OzA3OjE3OjI5IFBNOzU7MzEwNg=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Add the position element you want in array"/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter numbers of elements in array: &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="a" type="Integer" array="True" size="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter position of elements you want to delete in array: (position from 0 to n-1)&quot;" newline="True"/>
+            <declare name="position" type="Integer" array="False" size=""/>
+            <input variable="position"/>
+            <if expression="position&gt;=0 AND position&lt;=n-1">
+                <then/>
+                <else>
+                    <output expression="&quot;Enter position of elements you want to delete in array (position from 0 to n-1): &quot;" newline="True"/>
+                    <input variable="position"/>
+                </else>
+            </if>
+            <declare name="value" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter value you want to add that position: &quot;" newline="True"/>
+            <input variable="value"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(10)"/>
+                <output expression="a[i]" newline="True"/>
+            </for>
+            <output expression="&quot;----------&quot;" newline="True"/>
+            <call expression="addElement(a,n,position,value)"/>
+        </body>
+    </function>
+    <function name="addElement" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+            <parameter name="position" type="Integer" array="False"/>
+            <parameter name="value" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="m" type="Integer" array="False" size=""/>
+            <assign variable="m" expression="n+1"/>
+            <declare name="b" type="Integer" array="True" size="m"/>
+            <for variable="i" start="m-1" end="position+1" direction="dec" step="1">
+                <if expression="i=position+1">
+                    <then>
+                        <assign variable="b[i]" expression="a[i-1]"/>
+                        <assign variable="b[i-1]" expression="value"/>
+                    </then>
+                    <else>
+                        <assign variable="b[i]" expression="a[i-1]"/>
+                    </else>
+                </if>
+            </for>
+            <for variable="i" start="0" end="position-1" direction="inc" step="1">
+                <assign variable="b[i]" expression="a[i]"/>
+            </for>
+            <output expression="&quot; Array after add element: &quot;" newline="True"/>
+            <for variable="i" start="0" end="m-1" direction="inc" step="1">
+                <output expression="b[i]" newline="True"/>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
