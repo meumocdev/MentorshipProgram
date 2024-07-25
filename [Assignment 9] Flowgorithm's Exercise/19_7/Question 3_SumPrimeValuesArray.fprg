@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="THANH TAI"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-24 04:40:26 PM"/>
+        <attribute name="created" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTIwOzAzOjQ0OjQxIFBNOzI5Nzk="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzA0OjQwOjI2IFBNOzc7MzA5Nw=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Calculate the sum of all prime numbers in the array."/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="a" type="Integer" array="True" size="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="j" type="Integer" array="False" size=""/>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <declare name="count" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(10)"/>
+                <output expression="a[i]" newline="True"/>
+                <if expression="isPrimeNumber(a[i])=true">
+                    <then>
+                        <assign variable="sum" expression="sum+a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;Sum of all prime numbers of the array is: &quot; &amp; sum" newline="True"/>
+        </body>
+    </function>
+    <function name="isPrimeNumber" type="Boolean" variable="prime">
+        <parameters>
+            <parameter name="num" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="prime" type="Boolean" array="False" size=""/>
+            <assign variable="prime" expression="TRUE"/>
+            <if expression="num &gt; 1">
+                <then>
+                    <declare name="i" type="Integer" array="False" size=""/>
+                    <for variable="i" start="2" end="num-1" direction="inc" step="1">
+                        <if expression="num % i = 0">
+                            <then>
+                                <assign variable="prime" expression="FALSE"/>
+                            </then>
+                            <else/>
+                        </if>
+                    </for>
+                </then>
+                <else>
+                    <assign variable="prime" expression="false"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

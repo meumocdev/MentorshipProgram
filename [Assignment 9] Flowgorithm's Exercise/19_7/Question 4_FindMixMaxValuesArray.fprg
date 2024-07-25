@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="THANH TAI"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-24 04:58:26 PM"/>
+        <attribute name="created" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTIwOzAzOjQ0OjQxIFBNOzI5Nzk="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzA0OjQyOjEwIFBNOzE7VGhpbmtib29rO0RFU0tUT1AtTTg0VDNWRTsyMDI0LTA3LTE5OzEwOjE3OjUwIFBNO1F1ZXN0aW9uIDQgLSBGaW5kIG1pbiwgbWF4IGFycmF5LmZwcmc7OTcyNg=="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI0OzA0OjU4OjI2IFBNOzY7MzEwNQ=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="a" type="Integer" array="True" size="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="max" type="Integer" array="False" size=""/>
+            <declare name="min" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(10)"/>
+                <output expression="a[i]" newline="True"/>
+            </for>
+            <output expression="&quot;Maximum value of the array is: &quot; &amp; max(a, n) &amp; &quot;, Minimum value of the array is: &quot; &amp; min(a, n)" newline="True"/>
+        </body>
+    </function>
+    <function name="max" type="Integer" variable="max">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="max" type="Integer" array="False" size=""/>
+            <assign variable="max" expression="a[0]"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="a[i] &gt; max">
+                    <then>
+                        <assign variable="max" expression="a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+    <function name="min" type="Integer" variable="min">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="min" type="Integer" array="False" size=""/>
+            <assign variable="min" expression="a[0]"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="a[i]&lt;min">
+                    <then>
+                        <assign variable="min" expression="a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>

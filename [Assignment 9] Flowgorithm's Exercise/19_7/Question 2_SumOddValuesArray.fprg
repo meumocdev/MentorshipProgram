@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="THANH TAI"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-20 03:59:14 PM"/>
+        <attribute name="created" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTIwOzAzOjQ0OjQxIFBNOzI5Nzk="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTIwOzAzOjU5OjE0IFBNOzI7MzA5NA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <input variable="n"/>
+            <declare name="a" type="Integer" array="True" size="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="sum" type="Integer" array="False" size=""/>
+            <assign variable="sum" expression="0"/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(10)"/>
+                <output expression="a[i]" newline="True"/>
+                <if expression="a[i] % 2 != 0">
+                    <then>
+                        <assign variable="sum" expression="sum+a[i]"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <output expression="&quot;Sum: &quot;&amp;sum" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

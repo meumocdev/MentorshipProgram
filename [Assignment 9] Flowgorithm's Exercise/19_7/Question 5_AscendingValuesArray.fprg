@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="THANH TAI"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-07-25 09:24:36 AM"/>
+        <attribute name="created" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTIwOzAzOjQ0OjQxIFBNOzI5Nzk="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI1OzA5OjIzOjQ2IEFNOzQ7VGhpbmtib29rO0RFU0tUT1AtTTg0VDNWRTsyMDI0LTA3LTIwOzA4OjU2OjI3IEFNO1F1ZXN0aW9uIDUgLSBTb3J0IGFycmF5LmZwcmc7OTAwMQ=="/>
+        <attribute name="edited" value="VEhBTkggVEFJO0RFU0tUT1AtQjRVOUxMUjsyMDI0LTA3LTI1OzA5OjI0OjM2IEFNOzY7MzA5MA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <comment text="Given an integer n, create an array of n elements, each randomly ranging from 0 to 9. Sort the elements in ascending and descending order."/>
+            <declare name="n" type="Integer" array="False" size=""/>
+            <output expression="&quot;Enter integer: &quot;" newline="True"/>
+            <input variable="n"/>
+            <declare name="a" type="Integer" array="True" size="n"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <assign variable="a[i]" expression="RANDOM(10)"/>
+            </for>
+            <call expression="ascSort(a, n)"/>
+            <output expression="&quot;Increasing order: &quot;" newline="False"/>
+            <call expression="printArray(a, n)"/>
+            <call expression="descSort(a, n)"/>
+            <output expression="&quot;Decreasing order: &quot;" newline="False"/>
+            <call expression="printArray(a, n)"/>
+        </body>
+    </function>
+    <function name="ascSort" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, temp" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <declare name="j" type="Integer" array="False" size=""/>
+                <for variable="j" start="i+1" end="n-1" direction="inc" step="1">
+                    <if expression="a[i] &gt; a[j]">
+                        <then>
+                            <assign variable="temp" expression="a[i]"/>
+                            <assign variable="a[i]" expression="a[j]"/>
+                            <assign variable="a[j]" expression="temp"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="descSort" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i, temp" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <declare name="j" type="Integer" array="False" size=""/>
+                <for variable="j" start="i+1" end="n-1" direction="inc" step="1">
+                    <if expression="a[i] &lt; a[j]">
+                        <then>
+                            <assign variable="temp" expression="a[i]"/>
+                            <assign variable="a[i]" expression="a[j]"/>
+                            <assign variable="a[j]" expression="temp"/>
+                        </then>
+                        <else/>
+                    </if>
+                </for>
+            </for>
+        </body>
+    </function>
+    <function name="printArray" type="None" variable="">
+        <parameters>
+            <parameter name="a" type="Integer" array="True"/>
+            <parameter name="n" type="Integer" array="False"/>
+        </parameters>
+        <body>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <for variable="i" start="0" end="n-1" direction="inc" step="1">
+                <if expression="i != n - 1">
+                    <then>
+                        <output expression="a[i] &amp; &quot;, &quot;" newline="False"/>
+                    </then>
+                    <else>
+                        <output expression="a[i]" newline="True"/>
+                    </else>
+                </if>
+            </for>
+        </body>
+    </function>
+</flowgorithm>
